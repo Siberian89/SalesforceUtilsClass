@@ -13,7 +13,7 @@ public inherited sharing class Utils {
     * @author Siberian89 | 2022-08-19 
     * @param objApiName Object Api Name
     * @param rtDevName RecordType Developer Name
-    * @return Id 
+    * @return Id recordTypeId or null
     **/
     public static Id getObjectRecordTypeId(String objApiName, String rtDevName){
         Id recordTypeId;
