@@ -9,8 +9,9 @@
 @isTest
 private class UtilsTest {
 
+    //START getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
     /**
-    * @description test method for Utils.getObjectRecordTypeId in case of blank parameters
+    * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of blank parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
@@ -19,11 +20,11 @@ private class UtilsTest {
         Id testResultId = Utils.getObjectRecordTypeId('','');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with blank parameters in getObjectRecordTypeId');
+        System.assertEquals(null, testResultId, 'unexpected behavior with blank parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
     }
 
     /**
-    * @description test method for Utils.getObjectRecordTypeId in case of invalid parameters
+    * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
@@ -32,8 +33,9 @@ private class UtilsTest {
         Id testResultId = Utils.getObjectRecordTypeId('NotAnObject','NotARecordType');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId');
+        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
     }
+    //STOP getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
 
     //START getSelectAllFieldQueryString(String objApiName) TESTS
     /**
