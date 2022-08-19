@@ -60,5 +60,31 @@ public inherited sharing class Utils {
           
         return queryString;
     }
+
+    /**
+    * @description check if an user can create an object with the specified fields
+    * @author Siberian89 | 2022-08-19 
+    * @param objApiName Object Api Name
+    * @param fieldApiNameList List of Fields Api Name to check
+    * @return boolean isCreateable true if the user can create the object with all the specified fields, otherwise false
+    **/
+    public static boolean isObjectCreateable(String objApiName, List<String> fieldApiNameList){
+        if(String.isBlank(objApiName) || fieldApiNameList == null || fieldApiNameList.isEmpty()){
+            return false;
+        }
+
+        Boolean isCreateable = true;
+        try{
+            Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
+            for(String fieldApiName : fieldApiNameList){
+                isCreateable = isCreateable && fieldMap.get(fieldApiName).getDescribe().isCreateable();
+            }
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+            isCreateable = false;
+        }
+        
+        return isCreateable;
+    }
     
 }

@@ -79,4 +79,59 @@ private class UtilsTest {
     }
     //STOP getSelectAllFieldQueryString(String objApiName) TESTS
 
+    //START isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS
+    /**
+    * @description test method for Utils.isObjectCreateable(String objApiName, List<String> fieldApiNameList) in case of correct parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectCreateableTestCorrectParam(){
+        String uniqueUserName = 'sysadmuser' + DateTime.now().getTime() + '@testorg.com';
+        Profile sysAdmProfile = [SELECT Id FROM Profile WHERE Name = 'Standard User'];
+        User testAdminUser = new User(Alias = 'test0987', Email = uniqueUserName,
+                                        EmailEncodingKey = 'UTF-8', LastName = 'Testing', LanguageLocaleKey = 'en_US',
+                                        LocaleSidKey = 'en_US', ProfileId = sysAdmProfile.Id,
+                                        TimeZoneSidKey = 'America/Los_Angeles',
+                                        UserName = uniqueUserName);
+
+        List<String> fieldApiNameList = new List<String>{'Name'};
+        Boolean isCreateable;
+
+        System.runAs(testAdminUser) {
+            Test.startTest();
+            isCreateable = Utils.isObjectCreateable('Account', fieldApiNameList);
+            Test.stopTest();
+        }
+
+        System.assertEquals(true, isCreateable, 'unexpected result for Admin in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+    }
+
+    /**
+    * @description test method for Utils.isObjectCreateable(String objApiName, List<String> fieldApiNameList) in case of blank parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectCreateableTestNullParam(){
+        Test.startTest();
+        Boolean isCreateable = Utils.isObjectCreateable(null, null);
+        Test.stopTest();
+
+        System.assertEquals(false, isCreateable, 'unexpected behavior with blank parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+    }
+
+    /**
+    * @description test method for Utils.isObjectCreateable(String objApiName, List<String> fieldApiNameList) in case of invalid parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectCreateableTestException(){
+        List<String> fieldApiNameList = new List<String>{'Id'};
+        Test.startTest();
+        Boolean isCreateable = Utils.isObjectCreateable('NotAnObject',fieldApiNameList);
+        Test.stopTest();
+
+        System.assertEquals(false, isCreateable, 'unexpected behavior with invalid parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+    }
+    //STOP isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS
+
 }
