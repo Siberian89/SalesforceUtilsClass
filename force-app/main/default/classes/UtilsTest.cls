@@ -35,4 +35,46 @@ private class UtilsTest {
         System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId');
     }
 
+    //START getSelectAllFieldQueryString(String objApiName) TESTS
+    /**
+    * @description test method for Utils.getSelectAllFieldQueryString(String objApiName) in case of correct parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getSelectAllFieldQueryStringTestCorrectParam(){
+        Test.startTest();
+        String testQuery = Utils.getSelectAllFieldQueryString('Account');
+        Test.stopTest();
+
+        System.assertEquals(true, String.isNotBlank(testQuery), 'empty query returned by getSelectAllFieldQueryString(String objApiName)');
+        System.assertEquals(true, testQuery.startsWith('SELECT '), 'incorrect query returned by getSelectAllFieldQueryString(String objApiName)');
+    }
+
+    /**
+    * @description test method for Utils.getSelectAllFieldQueryString(String objApiName) in case of blank parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getSelectAllFieldQueryStringTestNullParam(){
+        Test.startTest();
+        String testQuery = Utils.getSelectAllFieldQueryString('');
+        Test.stopTest();
+
+        System.assertEquals(null, testQuery, 'unexpected behavior with blank parameter in getSelectAllFieldQueryString(String objApiName)');
+    }
+
+    /**
+    * @description test method for Utils.getSelectAllFieldQueryString(String objApiName) in case of invalid parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getSelectAllFieldQueryStringTestException(){
+        Test.startTest();
+        Id testQuery = Utils.getSelectAllFieldQueryString('NotAnObject');
+        Test.stopTest();
+
+        System.assertEquals(null, testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
+    }
+    //STOP getSelectAllFieldQueryString(String objApiName) TESTS
+
 }

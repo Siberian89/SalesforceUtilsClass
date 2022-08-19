@@ -27,5 +27,38 @@ public inherited sharing class Utils {
         }
         return recordTypeId;
     }
+
+    /**
+    * @description returns a stirng query like 'SELECT * FROM sObject' adding all fields to the query
+    * @author Siberian89 | 2022-08-19 
+    * @param objApiName Object Api Name
+    * @return String queryString containing all the fields or null
+    **/
+    public static String getSelectAllFieldQueryString(String objApiName){
+        if(String.isBlank(objApiName)){
+            return null;
+        }
+
+        String queryString = null;
+        try{
+            Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
+            queryString = 'SELECT ';
+
+            for(String fieldApiName: fieldMap.KeySet()){
+                if(fieldMap.get(fieldApiName).getDescribe().getType() == Schema.DisplayType.Picklist){
+                    queryString += 'toLabel('+ fieldApiName + '), ';
+                }else{
+                    queryString += fieldApiName + ', ';
+                }
+            }
+
+            queryString = (queryString.endsWith(',')) ? queryString.removeEnd(', ') : queryString + 'Id';
+            queryString += ' FROM ' + objApiName;
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+        }        
+          
+        return queryString;
+    }
     
 }
