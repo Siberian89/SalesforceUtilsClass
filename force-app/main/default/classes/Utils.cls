@@ -86,5 +86,31 @@ public inherited sharing class Utils {
         
         return isCreateable;
     }
+
+    /**
+    * @description check if an user can update an object with the specified fields
+    * @author Siberian89 | 2022-08-19 
+    * @param objApiName Object Api Name
+    * @param fieldApiNameList List of Fields Api Name to check
+    * @return boolean isUpdateable true if the user can update the object with all the specified fields, otherwise false
+    **/
+    public static boolean isObjectUpdateable(String objApiName, List<String> fieldApiNameList){
+        if(String.isBlank(objApiName) || fieldApiNameList == null || fieldApiNameList.isEmpty()){
+            return false;
+        }
+
+        Boolean isUpdateable = true;
+        try{
+            Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
+            for(String fieldApiName : fieldApiNameList){
+                isUpdateable = isUpdateable && fieldMap.get(fieldApiName).getDescribe().isUpdateable();
+            }
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+            isUpdateable = false;
+        }
+
+        return isUpdateable;
+    }
     
 }

@@ -134,4 +134,59 @@ private class UtilsTest {
     }
     //STOP isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS
 
+    //START isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS
+    /**
+    * @description test method for Utils.isObjectUpdateable(String objApiName, List<String> fieldApiNameList) in case of correct parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectUpdateableTestCorrectParam(){
+        String uniqueUserName = 'sysadmuser' + DateTime.now().getTime() + '@testorg.com';
+        Profile sysAdmProfile = [SELECT Id FROM Profile WHERE Name = 'Standard User'];
+        User testAdminUser = new User(Alias = 'test0987', Email = uniqueUserName,
+                                        EmailEncodingKey = 'UTF-8', LastName = 'Testing', LanguageLocaleKey = 'en_US',
+                                        LocaleSidKey = 'en_US', ProfileId = sysAdmProfile.Id,
+                                        TimeZoneSidKey = 'America/Los_Angeles',
+                                        UserName = uniqueUserName);
+
+        List<String> fieldApiNameList = new List<String>{'Name'};
+        Boolean isUpdateable;
+
+        System.runAs(testAdminUser) {
+            Test.startTest();
+            isUpdateable = Utils.isObjectUpdateable('Account', fieldApiNameList);
+            Test.stopTest();
+        }
+
+        System.assertEquals(true, isUpdateable, 'unexpected result for Admin in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+    }
+
+    /**
+    * @description test method for Utils.isObjectUpdateable(String objApiName, List<String> fieldApiNameList) in case of blank parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectUpdateableTestNullParam(){
+        Test.startTest();
+        Boolean isUpdateable = Utils.isObjectUpdateable(null, null);
+        Test.stopTest();
+
+        System.assertEquals(false, isUpdateable, 'unexpected behavior with blank parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+    }
+
+    /**
+    * @description test method for Utils.isObjectUpdateable(String objApiName, List<String> fieldApiNameList) in case of invalid parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void isObjectUpdateableTestException(){
+        List<String> fieldApiNameList = new List<String>{'Name'};
+        Test.startTest();
+        Boolean isUpdateable = Utils.isObjectUpdateable('NotAnObject',fieldApiNameList);
+        Test.stopTest();
+
+        System.assertEquals(false, isUpdateable, 'unexpected behavior with invalid parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+    }
+    //STOP isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS
+
 }
