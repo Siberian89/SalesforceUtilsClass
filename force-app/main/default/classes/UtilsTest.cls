@@ -125,7 +125,7 @@ private class UtilsTest {
     **/
     @isTest
     private static void isObjectCreateableTestException(){
-        List<String> fieldApiNameList = new List<String>{'Id'};
+        List<String> fieldApiNameList = new List<String>{'Name'};
         Test.startTest();
         Boolean isCreateable = Utils.isObjectCreateable('NotAnObject',fieldApiNameList);
         Test.stopTest();
