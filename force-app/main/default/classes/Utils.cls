@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-08-19
- * @last modified on  : 2022-08-19
+ * @last modified on  : 2022-08-25
  * @last modified by  : Siberian89
 **/
 public inherited sharing class Utils {
@@ -17,14 +17,13 @@ public inherited sharing class Utils {
     **/
     public static Id getObjectRecordTypeId(String objApiName, String rtDevName){
         Id recordTypeId;
-        if (String.isBlank(objApiName) || String.isBlank(rtDevName)){
-            return null;
-        }
+
         try{
             recordTypeId = Schema.getGlobalDescribe().get(objApiName).getDescribe().getRecordTypeInfosByDeveloperName().get(rtDevName).getRecordTypeId();
         }catch(Exception ex){
             System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
         }
+
         return recordTypeId;
     }
 
@@ -35,29 +34,27 @@ public inherited sharing class Utils {
     * @return String queryString containing all the fields or null
     **/
     public static String getSelectAllFieldQueryString(String objApiName){
-        if(String.isBlank(objApiName)){
-            return null;
-        }
+        String queryString;
 
-        String queryString = null;
         try{
             Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
             queryString = 'SELECT ';
 
             for(String fieldApiName: fieldMap.KeySet()){
                 if(fieldMap.get(fieldApiName).getDescribe().getType() == Schema.DisplayType.Picklist){
-                    queryString += 'toLabel('+ fieldApiName + '), ';
+                    queryString += 'toLabel(' + fieldApiName + '), ';
                 }else{
                     queryString += fieldApiName + ', ';
                 }
             }
 
-            queryString = (queryString.endsWith(',')) ? queryString.removeEnd(', ') : queryString + 'Id';
-            queryString += ' FROM ' + objApiName;
+            //there are no cases where an object exists but has no fields
+            queryString = queryString.removeEnd(', ') + ' FROM ' + objApiName;
         }catch(Exception ex){
             System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
-        }        
-          
+            queryString = null;
+        }
+
         return queryString;
     }
 
@@ -69,11 +66,12 @@ public inherited sharing class Utils {
     * @return boolean isCreateable true if the user can create the object with all the specified fields, otherwise false
     **/
     public static boolean isObjectCreateable(String objApiName, List<String> fieldApiNameList){
-        if(String.isBlank(objApiName) || fieldApiNameList == null || fieldApiNameList.isEmpty()){
+        if(fieldApiNameList == null || fieldApiNameList.isEmpty()){
             return false;
         }
 
         Boolean isCreateable = true;
+
         try{
             Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
             for(String fieldApiName : fieldApiNameList){
@@ -95,11 +93,12 @@ public inherited sharing class Utils {
     * @return boolean isUpdateable true if the user can update the object with all the specified fields, otherwise false
     **/
     public static boolean isObjectUpdateable(String objApiName, List<String> fieldApiNameList){
-        if(String.isBlank(objApiName) || fieldApiNameList == null || fieldApiNameList.isEmpty()){
+        if(fieldApiNameList == null || fieldApiNameList.isEmpty()){
             return false;
         }
 
         Boolean isUpdateable = true;
+        
         try{
             Map<String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap();
             for(String fieldApiName : fieldApiNameList){
