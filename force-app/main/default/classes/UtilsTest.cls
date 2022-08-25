@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-08-19
+ * @last modified on  : 2022-08-25
  * @last modified by  : Siberian89
 **/
 @isTest
@@ -11,26 +11,13 @@ private class UtilsTest {
 
     //START getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
     /**
-    * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of blank parameters
-    * @author Siberian89 | 2022-08-19 
-    **/
-    @isTest
-    private static void getObjectRecordTypeIdTestNullParam(){
-        Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeId('','');
-        Test.stopTest();
-
-        System.assertEquals(null, testResultId, 'unexpected behavior with blank parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
-    }
-
-    /**
     * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
     private static void getObjectRecordTypeIdTestException(){
         Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeId('NotAnObject','NotARecordType');
+        Id testResultId = Utils.getObjectRecordTypeId('NotAnObject','');
         Test.stopTest();
 
         System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
@@ -50,19 +37,6 @@ private class UtilsTest {
 
         System.assertEquals(true, String.isNotBlank(testQuery), 'empty query returned by getSelectAllFieldQueryString(String objApiName)');
         System.assertEquals(true, testQuery.startsWith('SELECT '), 'incorrect query returned by getSelectAllFieldQueryString(String objApiName)');
-    }
-
-    /**
-    * @description test method for Utils.getSelectAllFieldQueryString(String objApiName) in case of blank parameter
-    * @author Siberian89 | 2022-08-19 
-    **/
-    @isTest
-    private static void getSelectAllFieldQueryStringTestNullParam(){
-        Test.startTest();
-        String testQuery = Utils.getSelectAllFieldQueryString('');
-        Test.stopTest();
-
-        System.assertEquals(null, testQuery, 'unexpected behavior with blank parameter in getSelectAllFieldQueryString(String objApiName)');
     }
 
     /**
