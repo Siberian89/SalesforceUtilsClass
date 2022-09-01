@@ -31,7 +31,7 @@ public inherited sharing class Utils {
     * @description method to get a RecordTypeId of an Object from an Object Api Name and a RecordType Name
     * @author Siberian89 | 2022-09-01 
     * @param objApiName Object Api Name
-    * @param rtDevName RecordType Name
+    * @param rtName RecordType Name
     * @return Id recordTypeId or null
     **/
     public static Id getObjectRecordTypeIdFromName(String objApiName, String rtName){
