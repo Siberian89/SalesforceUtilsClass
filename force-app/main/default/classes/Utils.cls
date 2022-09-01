@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-08-19
- * @last modified on  : 2022-08-25
+ * @last modified on  : 2022-09-01
  * @last modified by  : Siberian89
 **/
 public inherited sharing class Utils {
@@ -15,7 +15,7 @@ public inherited sharing class Utils {
     * @param rtDevName RecordType Developer Name
     * @return Id recordTypeId or null
     **/
-    public static Id getObjectRecordTypeId(String objApiName, String rtDevName){
+    public static Id getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName){
         Id recordTypeId;
 
         try{

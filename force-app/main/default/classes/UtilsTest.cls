@@ -3,26 +3,26 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-08-25
+ * @last modified on  : 2022-09-01
  * @last modified by  : Siberian89
 **/
 @isTest
 private class UtilsTest {
 
-    //START getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
+    //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
     /**
-    * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
+    * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
-    private static void getObjectRecordTypeIdTestException(){
+    private static void getObjectRecordTypeIdFromDeveloperNameTestException(){
         Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeId('NotAnObject','');
+        Id testResultId = Utils.getObjectRecordTypeIdFromDeveloperName('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
+        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
     }
-    //STOP getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
+    //STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
 
     //START getSelectAllFieldQueryString(String objApiName) TESTS
     /**
