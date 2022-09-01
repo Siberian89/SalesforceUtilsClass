@@ -39,7 +39,7 @@ private class UtilsTest {
     }
     //STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
 
-    //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
+    //START getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
     /**
     * @description test method for Utils.getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-09-01 
