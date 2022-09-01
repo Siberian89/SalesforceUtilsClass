@@ -3,26 +3,71 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-08-25
+ * @last modified on  : 2022-09-01
  * @last modified by  : Siberian89
 **/
 @isTest
 private class UtilsTest {
 
-    //START getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
+    //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
     /**
-    * @description test method for Utils.getObjectRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
+    * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
-    private static void getObjectRecordTypeIdTestException(){
+    private static void getObjectRecordTypeIdFromDeveloperNameTestException(){
         Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeId('NotAnObject','');
+        Id testResultId = Utils.getObjectRecordTypeIdFromDeveloperName('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeId(String objApiName, String rtDevName)');
+        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
     }
-    //STOP getObjectRecordTypeId(String objApiName, String rtDevName) TESTS
+    //STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
+
+    //START getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+    /**
+    * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getObjectRecordTypeIdFromNameTestException(){
+        Test.startTest();
+        Id testResultId = Utils.getObjectRecordTypeIdFromName('NotAnObject','');
+        Test.stopTest();
+
+        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
+    }
+    //STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+
+    //START getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+    /**
+    * @description test method for Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
+    * @author Siberian89 | 2022-09-01 
+    **/
+    @isTest
+    private static void getObjectRecordTypeDeveloperNameFromRecordTypeIdTestException(){
+        Test.startTest();
+        String testResultDeveloperName = Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId('NotAnObject','');
+        Test.stopTest();
+
+        System.assertEquals(true, String.isBlank(testResultDeveloperName), 'unexpected behavior with invalid parameters in getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, Id rtId)');
+    }
+    //STOP getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+
+    //START getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+    /**
+    * @description test method for Utils.getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
+    * @author Siberian89 | 2022-09-01 
+    **/
+    @isTest
+    private static void getObjectRecordTypeNameFromRecordTypeIdTestException(){
+        Test.startTest();
+        String testResultName = Utils.getObjectRecordTypeNameFromRecordTypeId('NotAnObject','');
+        Test.stopTest();
+
+        System.assertEquals(true, String.isBlank(testResultName), 'unexpected behavior with invalid parameters in getObjectRecordTypeNameFromRecordTypeId(String objApiName, Id rtId)');
+    }
+    //STOP getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
 
     //START getSelectAllFieldQueryString(String objApiName) TESTS
     /**
