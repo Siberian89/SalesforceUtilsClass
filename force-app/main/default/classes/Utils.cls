@@ -28,6 +28,25 @@ public inherited sharing class Utils {
     }
 
     /**
+    * @description method to get a RecordTypeId of an Object from an Object Api Name and a RecordType Name
+    * @author Siberian89 | 2022-09-01 
+    * @param objApiName Object Api Name
+    * @param rtDevName RecordType Name
+    * @return Id recordTypeId or null
+    **/
+    public static Id getObjectRecordTypeIdFromName(String objApiName, String rtName){
+        Id recordTypeId;
+
+        try{
+            recordTypeId = Schema.getGlobalDescribe().get(objApiName).getDescribe().getRecordTypeInfosByName().get(rtName).getRecordTypeId();
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+        }
+
+        return recordTypeId;
+    }
+
+    /**
     * @description method to get a RecordType Name of an Object from an Object Api Name and a RecordType Id
     * @author Siberian89 | 2022-09-01 
     * @param objApiName Object Api Name

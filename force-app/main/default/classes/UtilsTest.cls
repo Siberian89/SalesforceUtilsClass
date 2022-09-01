@@ -24,6 +24,21 @@ private class UtilsTest {
     }
     //STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
 
+    //START getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+    /**
+    * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getObjectRecordTypeIdFromNameTestException(){
+        Test.startTest();
+        Id testResultId = Utils.getObjectRecordTypeIdFromName('NotAnObject','');
+        Test.stopTest();
+
+        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
+    }
+    //STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+
     //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
     /**
     * @description test method for Utils.getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
