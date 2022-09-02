@@ -3,11 +3,43 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-09-01
+ * @last modified on  : 2022-09-02
  * @last modified by  : Siberian89
 **/
 @isTest
 private class UtilsTest {
+
+    //START getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of correct parameters
+    * @author Siberian89 | 2022-09-02 
+    **/
+    @isTest
+    private static void getCronExpressionStringFromDateTimeTestCorrectParam(){
+        DateTime dtToTest = Datetime.newInstance(2008, 12, 1, 10, 30, 2);
+
+        Test.startTest();
+        String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
+        Test.stopTest();
+
+        System.assertEquals('2 30 10 1 12 ? 2008', testResultCronExp, 'different cron expression formatted by getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of invalid parameters
+    * @author Siberian89 | 2022-09-02 
+    **/
+    @isTest
+    private static void getCronExpressionStringFromDateTimeTestException(){
+        DateTime dtToTest;
+
+        Test.startTest();
+        String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
+        Test.stopTest();
+
+        System.assertEquals(null, testResultCronExp, 'unexpected behavior with invalid parameters in getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+    }
+    //STOP getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS
 
     //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
     /**

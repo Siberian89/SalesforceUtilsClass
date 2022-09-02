@@ -3,10 +3,28 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-08-19
- * @last modified on  : 2022-09-01
+ * @last modified on  : 2022-09-02
  * @last modified by  : Siberian89
 **/
 public inherited sharing class Utils {
+
+    /**
+    * @description method to format a DateTime into a string cron expression
+    * @author Siberian89 | 2022-09-02 
+    * @param dtToFormat DateTime to format
+    * @return String cron expression or null
+    **/
+    public static String getCronExpressionStringFromDateTime(DateTime dtToFormat){
+        String cronExpression;
+
+        try{
+            cronExpression = dtToFormat.format('s m H d M \'?\' yyyy');
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+        }
+
+        return cronExpression;
+    }
 
     /**
     * @description method to get a RecordTypeId of an Object from an Object Api Name and a RecordType Developer Name
