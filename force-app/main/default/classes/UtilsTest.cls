@@ -3,13 +3,46 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-09-01
+ * @last modified on  : 2022-09-02
  * @last modified by  : Siberian89
 **/
 @isTest
 private class UtilsTest {
 
-    //START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
+    /***** START getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS *****/
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of correct parameters
+    * @author Siberian89 | 2022-09-02 
+    **/
+    @isTest
+    private static void getCronExpressionStringFromDateTimeTestCorrectParam(){
+        DateTime dtToTest = Datetime.newInstance(2008, 12, 1, 10, 30, 2);
+
+        Test.startTest();
+        String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
+        Test.stopTest();
+
+        System.assertEquals('2 30 10 1 12 ? 2008', testResultCronExp, 'different cron expression formatted by getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of invalid parameters
+    * @author Siberian89 | 2022-09-02 
+    **/
+    @isTest
+    private static void getCronExpressionStringFromDateTimeTestException(){
+        DateTime dtToTest;
+
+        Test.startTest();
+        String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
+        Test.stopTest();
+
+        System.assertEquals(null, testResultCronExp, 'unexpected behavior with invalid parameters in getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+    }
+    /***** STOP getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS *****/
+
+
+    /***** START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS *****/
     /**
     * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
@@ -22,9 +55,10 @@ private class UtilsTest {
 
         System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
     }
-    //STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS
+    /***** STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS *****/
 
-    //START getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+
+    /***** START getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS *****/
     /**
     * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
@@ -37,9 +71,10 @@ private class UtilsTest {
 
         System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
     }
-    //STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS
+    /***** STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS *****/
 
-    //START getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+
+    /***** START getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
     /**
     * @description test method for Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-09-01 
@@ -52,9 +87,10 @@ private class UtilsTest {
 
         System.assertEquals(true, String.isBlank(testResultDeveloperName), 'unexpected behavior with invalid parameters in getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, Id rtId)');
     }
-    //STOP getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+    /***** STOP getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
 
-    //START getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+
+    /***** START getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
     /**
     * @description test method for Utils.getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-09-01 
@@ -67,9 +103,10 @@ private class UtilsTest {
 
         System.assertEquals(true, String.isBlank(testResultName), 'unexpected behavior with invalid parameters in getObjectRecordTypeNameFromRecordTypeId(String objApiName, Id rtId)');
     }
-    //STOP getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS
+    /***** STOP getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
 
-    //START getSelectAllFieldQueryString(String objApiName) TESTS
+
+    /***** START getSelectAllFieldQueryString(String objApiName) TESTS *****/
     /**
     * @description test method for Utils.getSelectAllFieldQueryString(String objApiName) in case of correct parameter
     * @author Siberian89 | 2022-08-19 
@@ -96,9 +133,10 @@ private class UtilsTest {
 
         System.assertEquals(null, testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
     }
-    //STOP getSelectAllFieldQueryString(String objApiName) TESTS
+    /***** STOP getSelectAllFieldQueryString(String objApiName) TESTS *****/
 
-    //START isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS
+
+    /***** START isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
     /**
     * @description test method for Utils.isObjectCreateable(String objApiName, List<String> fieldApiNameList) in case of correct parameter
     * @author Siberian89 | 2022-08-19 
@@ -151,9 +189,10 @@ private class UtilsTest {
 
         System.assertEquals(false, isCreateable, 'unexpected behavior with invalid parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
     }
-    //STOP isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS
+    /***** STOP isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
+    
 
-    //START isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS
+    /***** START isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
     /**
     * @description test method for Utils.isObjectUpdateable(String objApiName, List<String> fieldApiNameList) in case of correct parameter
     * @author Siberian89 | 2022-08-19 
@@ -206,6 +245,6 @@ private class UtilsTest {
 
         System.assertEquals(false, isUpdateable, 'unexpected behavior with invalid parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
     }
-    //STOP isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS
+    /***** STOP isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
 
 }
