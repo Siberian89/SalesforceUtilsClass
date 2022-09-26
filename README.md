@@ -4,4 +4,4 @@ This project was created with the intent of gather utility methods often useful 
 
 ## What about now?
 
-For now this is a private project. I'm using GitHut to track my changes and my progress.
+This was a private project and I was using GitHut to track changes. I decided to go public to share the code but, right now, I will be the only one to modify it.
