@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2022-09-02
+ * @last modified on  : 2023-01-21
  * @last modified by  : Siberian89
 **/
 @isTest
@@ -22,7 +22,7 @@ private class UtilsTest {
         String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
         Test.stopTest();
 
-        System.assertEquals('2 30 10 1 12 ? 2008', testResultCronExp, 'different cron expression formatted by getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+        Assert.areEqual('2 30 10 1 12 ? 2008', testResultCronExp, 'different cron expression formatted by getCronExpressionStringFromDateTime(DateTime dtToFormat)');
     }
 
     /**
@@ -37,7 +37,7 @@ private class UtilsTest {
         String testResultCronExp = Utils.getCronExpressionStringFromDateTime(dtToTest);
         Test.stopTest();
 
-        System.assertEquals(null, testResultCronExp, 'unexpected behavior with invalid parameters in getCronExpressionStringFromDateTime(DateTime dtToFormat)');
+        Assert.isNull(testResultCronExp, 'unexpected behavior with invalid parameters in getCronExpressionStringFromDateTime(DateTime dtToFormat)');
     }
     /***** STOP getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS *****/
 
@@ -53,7 +53,7 @@ private class UtilsTest {
         Id testResultId = Utils.getObjectRecordTypeIdFromDeveloperName('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
+        Assert.isNull(testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
     }
     /***** STOP getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS *****/
 
@@ -69,7 +69,7 @@ private class UtilsTest {
         Id testResultId = Utils.getObjectRecordTypeIdFromName('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(null, testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
+        Assert.isNull(testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
     }
     /***** STOP getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS *****/
 
@@ -85,7 +85,7 @@ private class UtilsTest {
         String testResultDeveloperName = Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(true, String.isBlank(testResultDeveloperName), 'unexpected behavior with invalid parameters in getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, Id rtId)');
+        Assert.isTrue(String.isBlank(testResultDeveloperName), 'unexpected behavior with invalid parameters in getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, Id rtId)');
     }
     /***** STOP getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
 
@@ -101,7 +101,7 @@ private class UtilsTest {
         String testResultName = Utils.getObjectRecordTypeNameFromRecordTypeId('NotAnObject','');
         Test.stopTest();
 
-        System.assertEquals(true, String.isBlank(testResultName), 'unexpected behavior with invalid parameters in getObjectRecordTypeNameFromRecordTypeId(String objApiName, Id rtId)');
+        Assert.isTrue(String.isBlank(testResultName), 'unexpected behavior with invalid parameters in getObjectRecordTypeNameFromRecordTypeId(String objApiName, Id rtId)');
     }
     /***** STOP getObjectRecordTypeNameFromRecordTypeId(String objApiName, String rtDevName) TESTS *****/
 
@@ -117,8 +117,8 @@ private class UtilsTest {
         String testQuery = Utils.getSelectAllFieldQueryString('Account');
         Test.stopTest();
 
-        System.assertEquals(true, String.isNotBlank(testQuery), 'empty query returned by getSelectAllFieldQueryString(String objApiName)');
-        System.assertEquals(true, testQuery.startsWith('SELECT '), 'incorrect query returned by getSelectAllFieldQueryString(String objApiName)');
+        Assert.isTrue(String.isNotBlank(testQuery), 'empty query returned by getSelectAllFieldQueryString(String objApiName)');
+        Assert.isTrue(testQuery.startsWith('SELECT '), 'incorrect query returned by getSelectAllFieldQueryString(String objApiName)');
     }
 
     /**
@@ -131,7 +131,7 @@ private class UtilsTest {
         Id testQuery = Utils.getSelectAllFieldQueryString('NotAnObject');
         Test.stopTest();
 
-        System.assertEquals(null, testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
+        Assert.isNull(testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
     }
     /***** STOP getSelectAllFieldQueryString(String objApiName) TESTS *****/
 
@@ -160,7 +160,7 @@ private class UtilsTest {
             Test.stopTest();
         }
 
-        System.assertEquals(true, isCreateable, 'unexpected result for Admin in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isTrue(isCreateable, 'unexpected result for Admin in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
     }
 
     /**
@@ -173,7 +173,7 @@ private class UtilsTest {
         Boolean isCreateable = Utils.isObjectCreateable(null, null);
         Test.stopTest();
 
-        System.assertEquals(false, isCreateable, 'unexpected behavior with blank parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isFalse(isCreateable, 'unexpected behavior with blank parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
     }
 
     /**
@@ -187,7 +187,7 @@ private class UtilsTest {
         Boolean isCreateable = Utils.isObjectCreateable('NotAnObject',fieldApiNameList);
         Test.stopTest();
 
-        System.assertEquals(false, isCreateable, 'unexpected behavior with invalid parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isFalse(isCreateable, 'unexpected behavior with invalid parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
     }
     /***** STOP isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
     
@@ -216,7 +216,7 @@ private class UtilsTest {
             Test.stopTest();
         }
 
-        System.assertEquals(true, isUpdateable, 'unexpected result for Admin in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isTrue(isUpdateable, 'unexpected result for Admin in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
     }
 
     /**
@@ -229,7 +229,7 @@ private class UtilsTest {
         Boolean isUpdateable = Utils.isObjectUpdateable(null, null);
         Test.stopTest();
 
-        System.assertEquals(false, isUpdateable, 'unexpected behavior with blank parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isFalse(isUpdateable, 'unexpected behavior with blank parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
     }
 
     /**
@@ -243,7 +243,7 @@ private class UtilsTest {
         Boolean isUpdateable = Utils.isObjectUpdateable('NotAnObject',fieldApiNameList);
         Test.stopTest();
 
-        System.assertEquals(false, isUpdateable, 'unexpected behavior with invalid parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
+        Assert.isFalse(isUpdateable, 'unexpected behavior with invalid parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
     }
     /***** STOP isObjectUpdateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
 
