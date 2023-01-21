@@ -3,9 +3,10 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-12-09
- * @last modified on  : 2022-12-09
+ * @last modified on  : 2023-01-21
  * @last modified by  : Siberian89
 **/
+@isTest
 public without sharing class TestDataFactory {
 
     /**

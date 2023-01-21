@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-12-09
- * @last modified on  : 2022-12-09
+ * @last modified on  : 2023-01-21
  * @last modified by  : Siberian89
 **/
 @isTest
@@ -20,7 +20,7 @@ private class TestDataFactoryTest {
         Test.startTest();
         Id pricebookId = TestDataFactory.createStandardPricebook();
         Test.stopTest();
-        System.assertEquals(standardPricebookId, pricebookId, 'Error creating test standard pricebook');
+        Assert.areEqual(standardPricebookId, pricebookId, 'Error creating test standard pricebook');
     }
     /***** STOP createStandardPricebook() TESTS *****/
     
