@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>Component that expose a button to open an external website</description>
+    <targets>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__HomePage">
+            <property name="buttonLabel" type="String" label="Button Label" default="Go to External Site" description="Button Label" required="true"/>
+            <property name="externalSiteUrl" type="String" label="External Site URL" default="" description="Target External Site URL"/>
+        </targetConfig>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="buttonLabel" type="String" label="Button Label" default="Go to External Site" description="Button Label" required="true"/>
+            <property name="externalSiteUrl" type="String" label="External Site URL" default="" description="Target External Site URL"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="buttonLabel" type="String" label="Button Label" default="Go to External Site" description="Button Label" required="true"/>
+            <property name="externalSiteUrl" type="String" label="External Site URL" default="" description="Target External Site URL"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

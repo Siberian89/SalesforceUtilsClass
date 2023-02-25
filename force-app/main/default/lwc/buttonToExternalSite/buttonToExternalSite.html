@@ -1,0 +1,18 @@
+<!--
+  @description       : Component that expose a button to open an external website
+  @author            : Siberian89
+  @group             : 
+  @created on        : 2023-02-25
+  @last modified on  : 2023-02-25
+  @last modified by  : Siberian89
+-->
+<template>
+    <lightning-layout>
+        <template lwc:if={isUrlEmpty}>
+            <button type="button" class={buttonClass} disabled>{buttonLabel}</button>
+        </template>
+        <template lwc:else>
+            <button type="button" class={buttonClass} onclick={handleButtonClick}>{buttonLabel}</button>
+        </template>
+    </lightning-layout>
+</template>
