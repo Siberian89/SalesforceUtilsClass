@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-08-19
- * @last modified on  : 2022-09-02
+ * @last modified on  : 2023-06-02
  * @last modified by  : Siberian89
 **/
 public inherited sharing class Utils {
@@ -131,6 +131,32 @@ public inherited sharing class Utils {
         }
 
         return queryString;
+    }
+
+    /**
+    * @description check if a value is valid for a picklist field and returns a valid value
+    * @author Siberian89 | 2023-06-02 
+    * @param valueToCheck value to check if valid for the picklist field
+    * @param objApiName object api name which contains the picklist field
+    * @param fieldApiName picklist field api name
+    * @return String value set in input if is valid or null
+    **/
+    public static String getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName){
+        Schema.DescribeFieldResult describeFieldResult = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap().get(fieldApiName).getDescribe();
+
+        if(!describeFieldResult.isRestrictedPicklist()){
+            return valueToCheck;
+        }
+
+        List<Schema.PicklistEntry> pleList = describeFieldResult.getPicklistValues();
+        Boolean isValueToCheckValid = false;
+        for(Integer i = 0; i < pleList.size(); i++){
+            if(valueToCheck == pleList[i].getValue()){
+                isValueToCheckValid = true;
+                break;
+            }
+        }
+        return (isValueToCheckValid) ? valueToCheck : null;
     }
 
     /**

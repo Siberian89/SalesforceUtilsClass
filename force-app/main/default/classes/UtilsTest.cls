@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             :
  * @created on        : 2022-08-19 
- * @last modified on  : 2023-01-21
+ * @last modified on  : 2023-06-02
  * @last modified by  : Siberian89
 **/
 @isTest
@@ -134,6 +134,29 @@ private class UtilsTest {
         Assert.isNull(testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
     }
     /***** STOP getSelectAllFieldQueryString(String objApiName) TESTS *****/
+
+    /***** START getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) TESTS *****/
+    /**
+    * @description test method for getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) in case of unrestricted standard parameter
+    * @author Siberian89 | 2022-08-19 
+    **/
+    @isTest
+    private static void getValidPicklistValueTestStandardPicklistParam(){
+        List<Schema.PicklistEntry> pleLeadStatusList = Lead.Status.getDescribe().getPicklistValues();
+        String valueToCheck = pleLeadStatusList[0].getValue();
+        String objApiName = 'Lead';
+        String fieldApiName = 'Status';
+
+        Test.startTest();
+        String returnedValue = Utils.getValidPicklistValue(valueToCheck, objApiName, fieldApiName);
+        Test.stopTest();
+
+        Assert.areEqual(valueToCheck, returnedValue, 'unexpected behavior with standard picklist parameter in getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName)');
+    }
+
+    //TODO: add more test to cover at 100%
+
+    /***** STOP getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) TESTS *****/
 
 
     /***** START isObjectCreateable(String objApiName, List<String> fieldApiNameList) TESTS *****/
