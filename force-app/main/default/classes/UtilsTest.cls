@@ -42,6 +42,113 @@ private class UtilsTest {
     /***** STOP getCronExpressionStringFromDateTime(DateTime dtToFormat) TESTS *****/
 
 
+    /***** START getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD) TESTS *****/
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of correct parameter
+    * @author Siberian89 | 2023-06-02 
+    **/
+    @isTest
+    private static void getDateFromStringFormatAAAAMMDDTestCorrectParam(){
+        Date dateToTest = Date.today();
+        String dateAAAAMMDD = '' + dateToTest.year();
+        if(dateToTest.month() < 10){
+            dateAAAAMMDD += '0' + dateToTest.month();
+        }else{
+            dateAAAAMMDD += dateToTest.month();
+        }
+        if(dateToTest.day() < 10){
+            dateAAAAMMDD += '0' + dateToTest.day();
+        }else{
+            dateAAAAMMDD += dateToTest.day();
+        }
+
+        Test.startTest();
+        Date returnedDate = Utils.getDateFromStringFormatAAAAMMDD(dateAAAAMMDD);
+        Test.stopTest();
+
+        Assert.areEqual(dateToTest, returnedDate, 'unexpected behavior with correct parameter in getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of correct parameter with dashes
+    * @author Siberian89 | 2023-06-02 
+    **/
+    @isTest
+    private static void getDateFromStringFormatAAAAMMDDTestCorrectAndDashesParam(){
+        Date dateToTest = Date.today();
+        String dateAAAAMMDD = '' + dateToTest.year() + '-';
+        if(dateToTest.month() < 10){
+            dateAAAAMMDD += '0' + dateToTest.month();
+        }else{
+            dateAAAAMMDD += dateToTest.month();
+        }
+        dateAAAAMMDD += '-';
+        if(dateToTest.day() < 10){
+            dateAAAAMMDD += '0' + dateToTest.day();
+        }else{
+            dateAAAAMMDD += dateToTest.day();
+        }
+
+        Test.startTest();
+        Date returnedDate = Utils.getDateFromStringFormatAAAAMMDD(dateAAAAMMDD);
+        Test.stopTest();
+
+        Assert.areEqual(dateToTest, returnedDate, 'unexpected behavior with correct parameter with dashes in getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of empty parameter
+    * @author Siberian89 | 2023-06-02 
+    **/
+    @isTest
+    private static void getDateFromStringFormatAAAAMMDDTestEmptyParam(){
+        String dateAAAAMMDD = '';
+
+        Test.startTest();
+        Date returnedDate = Utils.getDateFromStringFormatAAAAMMDD(dateAAAAMMDD);
+        Test.stopTest();
+
+        Assert.isNull(returnedDate, 'unexpected behavior with empty parameter in getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of invalid parameter
+    * @author Siberian89 | 2023-06-02 
+    **/
+    @isTest
+    private static void getDateFromStringFormatAAAAMMDDTestInvalidParam(){
+        String year = 'YYYY';
+        String month = 'MM';
+        String day = 'DD';
+        String dateAAAAMMDD = '' + year + '-' + month + '-' + day;
+
+        Test.startTest();
+        Date returnedDate = Utils.getDateFromStringFormatAAAAMMDD(dateAAAAMMDD);
+        Test.stopTest();
+
+        Assert.isNull(returnedDate, 'unexpected behavior with invalid parameter in getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD)');
+    }
+
+    /**
+    * @description test method for Utils.getCronExpressionStringFromDateTime(DateTime dtToFormat) in case of invalid date parameter
+    * @author Siberian89 | 2023-06-02 
+    **/
+    @isTest
+    private static void getDateFromStringFormatAAAAMMDDTestInvalidDateParam(){
+        String year = '9999';
+        String month = '99';
+        String day = '99';
+        String dateAAAAMMDD = '' + year + '-' + month + '-' + day;
+
+        Test.startTest();
+        Date returnedDate = Utils.getDateFromStringFormatAAAAMMDD(dateAAAAMMDD);
+        Test.stopTest();
+
+        Assert.isNull(returnedDate, 'unexpected behavior with invalid date parameter in getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD)');
+    }
+    /***** STOP getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD) TESTS *****/
+
+
     /***** START getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) TESTS *****/
     /**
     * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
@@ -134,6 +241,7 @@ private class UtilsTest {
         Assert.isNull(testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
     }
     /***** STOP getSelectAllFieldQueryString(String objApiName) TESTS *****/
+
 
     /***** START getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) TESTS *****/
     /**

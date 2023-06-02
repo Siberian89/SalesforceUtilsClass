@@ -27,6 +27,40 @@ public inherited sharing class Utils {
     }
 
     /**
+    * @description 
+    * @author Siberian89 | 2023-06-02 
+    * @param dateAAAAMMDD string formatted ad AAAAMMDD or AAAA-MM-DD
+    * @return Date correctly parsed date from the string or null
+    **/
+    public static Date getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD){
+        String stringDate = dateAAAAMMDD.remove('');
+        if(String.isBlank(stringDate) || (stringDate.length() != 8 && stringDate.length() != 10)){
+            return null;
+        }
+
+        if(stringDate.length() == 10){
+            stringDate = stringDate.remove('-');
+        }
+        
+        try{
+            Integer year = Integer.valueOf(stringDate.substring(0, 4));
+            Integer month = Integer.valueOf(stringDate.substring(4, 6));
+            Integer day = Integer.valueOf(stringDate.substring(6));
+        
+            Date dateToReturn = Date.newinstance(year, month, day);
+
+            if(!(dateToReturn.year() == year && dateToReturn.month() == month && dateToReturn.day() == day)){
+                throw new HandledException('Data not valid parsed from ' + dateAAAAMMDD);
+            }
+
+            return dateToReturn;
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+            return null;
+        }
+    }
+
+    /**
     * @description method to get a RecordTypeId of an Object from an Object Api Name and a RecordType Developer Name
     * @author Siberian89 | 2022-08-19 
     * @param objApiName Object Api Name
