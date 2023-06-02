@@ -156,8 +156,11 @@ private class UtilsTest {
     **/
     @isTest
     private static void getObjectRecordTypeIdFromDeveloperNameTestException(){
+        String objApiName = 'NotAnObject';
+        String rtDevName = '';
+
         Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeIdFromDeveloperName('NotAnObject','');
+        Id testResultId = Utils.getObjectRecordTypeIdFromDeveloperName(objApiName,rtDevName);
         Test.stopTest();
 
         Assert.isNull(testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName)');
@@ -167,13 +170,16 @@ private class UtilsTest {
 
     /***** START getObjectRecordTypeIdFromName(String objApiName, String rtName) TESTS *****/
     /**
-    * @description test method for Utils.getObjectRecordTypeIdFromDeveloperName(String objApiName, String rtDevName) in case of invalid parameters
+    * @description test method for Utils.getObjectRecordTypeIdFromName(String objApiName, String rtDevName) in case of invalid parameters
     * @author Siberian89 | 2022-08-19 
     **/
     @isTest
     private static void getObjectRecordTypeIdFromNameTestException(){
+        String objApiName = 'NotAnObject';
+        String rtDevName = '';
+
         Test.startTest();
-        Id testResultId = Utils.getObjectRecordTypeIdFromName('NotAnObject','');
+        Id testResultId = Utils.getObjectRecordTypeIdFromName(objApiName,rtDevName);
         Test.stopTest();
 
         Assert.isNull(testResultId, 'unexpected behavior with invalid parameters in getObjectRecordTypeIdFromName(String objApiName, String rtName)');
@@ -188,8 +194,11 @@ private class UtilsTest {
     **/
     @isTest
     private static void getObjectRecordTypeDeveloperNameFromRecordTypeIdTestException(){
+        String objApiName = 'NotAnObject';
+        String rtDevName = '';
+
         Test.startTest();
-        String testResultDeveloperName = Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId('NotAnObject','');
+        String testResultDeveloperName = Utils.getObjectRecordTypeDeveloperNameFromRecordTypeId(objApiName,rtDevName);
         Test.stopTest();
 
         Assert.isTrue(String.isBlank(testResultDeveloperName), 'unexpected behavior with invalid parameters in getObjectRecordTypeDeveloperNameFromRecordTypeId(String objApiName, Id rtId)');
@@ -204,8 +213,11 @@ private class UtilsTest {
     **/
     @isTest
     private static void getObjectRecordTypeNameFromRecordTypeIdTestException(){
+        String objApiName = 'NotAnObject';
+        String rtDevName = '';
+
         Test.startTest();
-        String testResultName = Utils.getObjectRecordTypeNameFromRecordTypeId('NotAnObject','');
+        String testResultName = Utils.getObjectRecordTypeNameFromRecordTypeId(objApiName,rtDevName);
         Test.stopTest();
 
         Assert.isTrue(String.isBlank(testResultName), 'unexpected behavior with invalid parameters in getObjectRecordTypeNameFromRecordTypeId(String objApiName, Id rtId)');
@@ -220,8 +232,10 @@ private class UtilsTest {
     **/
     @isTest
     private static void getSelectAllFieldQueryStringTestCorrectParam(){
+        String objApiName = 'Account';
+
         Test.startTest();
-        String testQuery = Utils.getSelectAllFieldQueryString('Account');
+        String testQuery = Utils.getSelectAllFieldQueryString(objApiName);
         Test.stopTest();
 
         Assert.isTrue(String.isNotBlank(testQuery), 'empty query returned by getSelectAllFieldQueryString(String objApiName)');
@@ -234,8 +248,10 @@ private class UtilsTest {
     **/
     @isTest
     private static void getSelectAllFieldQueryStringTestException(){
+        String objApiName = 'NotAnObject';
+
         Test.startTest();
-        Id testQuery = Utils.getSelectAllFieldQueryString('NotAnObject');
+        Id testQuery = Utils.getSelectAllFieldQueryString(objApiName);
         Test.stopTest();
 
         Assert.isNull(testQuery, 'unexpected behavior with invalid parameter in getSelectAllFieldQueryString(String objApiName)');
@@ -246,7 +262,7 @@ private class UtilsTest {
     /***** START getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) TESTS *****/
     /**
     * @description test method for getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName) in case of unrestricted standard parameter
-    * @author Siberian89 | 2022-08-19 
+    * @author Siberian89 | 2023-06-02 
     **/
     @isTest
     private static void getValidPicklistValueTestStandardPicklistParam(){
@@ -282,12 +298,13 @@ private class UtilsTest {
                                         TimeZoneSidKey = 'America/Los_Angeles',
                                         UserName = uniqueUserName);
 
+        String objApiName = 'Account';
         List<String> fieldApiNameList = new List<String>{'Name'};
         Boolean isCreateable;
 
         System.runAs(testAdminUser) {
             Test.startTest();
-            isCreateable = Utils.isObjectCreateable('Account', fieldApiNameList);
+            isCreateable = Utils.isObjectCreateable(objApiName, fieldApiNameList);
             Test.stopTest();
         }
 
@@ -313,9 +330,11 @@ private class UtilsTest {
     **/
     @isTest
     private static void isObjectCreateableTestException(){
+        String objApiName = 'NotAnObject';
         List<String> fieldApiNameList = new List<String>{'Name'};
+
         Test.startTest();
-        Boolean isCreateable = Utils.isObjectCreateable('NotAnObject',fieldApiNameList);
+        Boolean isCreateable = Utils.isObjectCreateable(objApiName,fieldApiNameList);
         Test.stopTest();
 
         Assert.isFalse(isCreateable, 'unexpected behavior with invalid parameter in isObjectCreateable(String objApiName, List<String> fieldApiNameList)');
@@ -338,12 +357,13 @@ private class UtilsTest {
                                         TimeZoneSidKey = 'America/Los_Angeles',
                                         UserName = uniqueUserName);
 
+        String objApiName = 'Account';
         List<String> fieldApiNameList = new List<String>{'Name'};
         Boolean isUpdateable;
 
         System.runAs(testAdminUser) {
             Test.startTest();
-            isUpdateable = Utils.isObjectUpdateable('Account', fieldApiNameList);
+            isUpdateable = Utils.isObjectUpdateable(objApiName, fieldApiNameList);
             Test.stopTest();
         }
 
@@ -369,9 +389,11 @@ private class UtilsTest {
     **/
     @isTest
     private static void isObjectUpdateableTestException(){
+        String objApiName = 'NotAnObject';
         List<String> fieldApiNameList = new List<String>{'Name'};
+        
         Test.startTest();
-        Boolean isUpdateable = Utils.isObjectUpdateable('NotAnObject',fieldApiNameList);
+        Boolean isUpdateable = Utils.isObjectUpdateable(objApiName,fieldApiNameList);
         Test.stopTest();
 
         Assert.isFalse(isUpdateable, 'unexpected behavior with invalid parameter in isObjectUpdateable(String objApiName, List<String> fieldApiNameList)');
