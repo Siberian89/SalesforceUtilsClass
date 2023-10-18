@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="cmpTitle" type="String" label="Component Title" default="Map" description="" required="true"/>
+            <property name="errorMessage" type="String" label="Error Message" default="Error occurred" description="" required="true"/>
+            <property name="longitudeFieldApiName" type="String" label="Longitude Field API Name" default="" description="the API name of the field where the Longitude is stored" required="true"/>
+            <property name="latitudeFieldApiName" type="String" label="Latitude Field API Name" default="" description="the API name of the field where the Latitude is stored" required="true"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

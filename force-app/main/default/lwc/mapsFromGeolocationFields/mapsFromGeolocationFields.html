@@ -1,0 +1,20 @@
+<!--
+  @description       : Dynamic component that shows a geographical map from longitude and latitude fields
+  @author            : Siberian89
+  @group             : 
+  @created on        : 2023-10-18
+  @last modified on  : 2023-10-18
+  @last modified by  : Siberian89
+-->
+<template>
+    <lightning-card title={cmpTitle} icon-name="action:map">
+        <template lwc:if={showMap}>
+          <lightning-map map-markers={mapMarkers} zoom-level="12"></lightning-map>
+        </template>
+        <template lwc:else>
+          <span class={errorMessageClass}>
+            <p>{errorMessage}</p>
+          </span>
+        </template>
+    </lightning-card>
+</template>
