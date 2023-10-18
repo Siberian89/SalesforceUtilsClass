@@ -3,7 +3,7 @@
  * @author            : Siberian89
  * @group             : 
  * @created on        : 2022-08-19
- * @last modified on  : 2022-09-02
+ * @last modified on  : 2023-06-02
  * @last modified by  : Siberian89
 **/
 public inherited sharing class Utils {
@@ -24,6 +24,40 @@ public inherited sharing class Utils {
         }
 
         return cronExpression;
+    }
+
+    /**
+    * @description 
+    * @author Siberian89 | 2023-06-02 
+    * @param dateAAAAMMDD string formatted ad AAAAMMDD or AAAA-MM-DD
+    * @return Date correctly parsed date from the string or null
+    **/
+    public static Date getDateFromStringFormatAAAAMMDD(String dateAAAAMMDD){
+        String stringDate = dateAAAAMMDD.remove('');
+        if(String.isBlank(stringDate) || (stringDate.length() != 8 && stringDate.length() != 10)){
+            return null;
+        }
+
+        if(stringDate.length() == 10){
+            stringDate = stringDate.remove('-');
+        }
+        
+        try{
+            Integer year = Integer.valueOf(stringDate.substring(0, 4));
+            Integer month = Integer.valueOf(stringDate.substring(4, 6));
+            Integer day = Integer.valueOf(stringDate.substring(6));
+        
+            Date dateToReturn = Date.newinstance(year, month, day);
+
+            if(!(dateToReturn.year() == year && dateToReturn.month() == month && dateToReturn.day() == day)){
+                throw new HandledException('Data not valid parsed from ' + dateAAAAMMDD);
+            }
+
+            return dateToReturn;
+        }catch(Exception ex){
+            System.debug(logginglevel.ERROR, ex.getMessage() + ' ' + ex.getStackTraceString());
+            return null;
+        }
     }
 
     /**
@@ -131,6 +165,32 @@ public inherited sharing class Utils {
         }
 
         return queryString;
+    }
+
+    /**
+    * @description check if a value is valid for a picklist field and returns a valid value
+    * @author Siberian89 | 2023-06-02 
+    * @param valueToCheck value to check if valid for the picklist field
+    * @param objApiName object api name which contains the picklist field
+    * @param fieldApiName picklist field api name
+    * @return String value set in input if is valid or null
+    **/
+    public static String getValidPicklistValue(String valueToCheck, String objApiName, String fieldApiName){
+        Schema.DescribeFieldResult describeFieldResult = Schema.getGlobalDescribe().get(objApiName).getDescribe().fields.getMap().get(fieldApiName).getDescribe();
+
+        if(!describeFieldResult.isRestrictedPicklist()){
+            return valueToCheck;
+        }
+
+        List<Schema.PicklistEntry> pleList = describeFieldResult.getPicklistValues();
+        Boolean isValueToCheckValid = false;
+        for(Integer i = 0; i < pleList.size(); i++){
+            if(valueToCheck == pleList[i].getValue()){
+                isValueToCheckValid = true;
+                break;
+            }
+        }
+        return (isValueToCheckValid) ? valueToCheck : null;
     }
 
     /**
